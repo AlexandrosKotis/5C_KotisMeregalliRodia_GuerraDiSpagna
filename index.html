@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, shrink-to-fit=no">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<link href="assets/images/favicon.png" rel="icon" />
+<title>Progetto POI - Guerra di Spagna</title>
+<meta name="description" content="Your ThemeForest item Name and description">
+<meta name="author" content="harnishdesign.net">
+
+<!-- Stylesheet
+============================== -->
+<!-- Bootstrap -->
+<link rel="stylesheet" type="text/css" href="assets/vendor/bootstrap/css/bootstrap.min.css" />
+<!-- Font Awesome Icon -->
+<link rel="stylesheet" type="text/css" href="assets/vendor/font-awesome/css/all.min.css" />
+<!-- Magnific Popup -->
+<link rel="stylesheet" type="text/css" href="assets/vendor/magnific-popup/magnific-popup.min.css" />
+<!-- Highlight Syntax -->
+<link rel="stylesheet" type="text/css" href="assets/vendor/highlight.js/styles/github.css" />
+<!-- Custom Stylesheet -->
+<link rel="stylesheet" type="text/css" href="assets/css/stylesheet.css" />
+</head>
+
+<body data-spy="scroll" data-target=".idocs-navigation" data-offset="125">
+
+<!-- Preloader -->
+<div class="preloader">
+  <div class="lds-ellipsis">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+</div>
+<!-- Preloader End --> 
+
+<!-- Document Wrapper   
+=============================== -->
+<div id="main-wrapper"> 
+  
+
+  
+  <!-- Content
+  ============================ -->
+  <div id="content" role="main">
+    
+	<!-- Sidebar Navigation
+	============================ -->
+	<div class="idocs-navigation bg-dark docs-navigation-dark">
+      <ul class="nav flex-column ">
+        <li class="nav-item"><a class="nav-link active" href="#start">Inizio</a>          
+        </li>
+        <li class="nav-item"><a class="nav-link" href="#architettura_informazione">Architettura informazione</a>          
+        </li>
+        <li class="nav-item"><a class="nav-link" href="#UML">UML</a>
+			<ul class="nav flex-column">
+            <li class="nav-item"><a class="nav-link" href="#umlcasiduso">Casi d'uso</a></li>
+            <li class="nav-item"><a class="nav-link" href="#umloggetti">Oggetti</a></li>
+            <li class="nav-item"><a class="nav-link" href="#umlstato">Stato</a></li>
+			<li class="nav-item"><a class="nav-link" href="#umlsequenza">Sequenza</a></li>
+           
+          </ul>
+		</li>
+        <li class="nav-item"><a class="nav-link" href="#contenuti">Contenuti</a>
+          
+        </li>
+		<li class="nav-item"><a class="nav-link" href="#wireframes">Wireframes</a></li>
+              
+		</li>
+         <li class="nav-item"><a class="nav-link" href="#progetto">Il progetto</a>
+           <ul class="nav flex-column">
+             <li class="nav-item"><a class="nav-link" href="#link">Link al progetto</a></li>
+             </ul>  
+         </li>
+      </ul>
+    </div>
+    
+ 
+    <div class="idocs-content">
+      <div class="container"> 
+   
+        <section id="start">
+        <h1>Documentazione</h1>
+        <h2>Guerra di Spagna</h2>
+        <p class="lead">Descrizione progetto
+          Obiettivo di questo progetto è la realizzazione di una applicazione web che mostra un insieme di punti di interesse su una mappa su un determinato tema o soggetto (questo progetto è basato specificamente sulla Guerra di Spagna).
+          </p>
+		<hr>
+		<div class="row">
+			<div class="col-sm-6 col-lg-4">
+				<ul class="list-unstyled">
+					<li><strong>Classe/Anno:</strong> 5C informatica - 24/25</li>
+					<li><strong>Author:</strong> Kotis Alexandros, Emanuele Meregalli, Rodia Thomas</li>
+				</ul>
+			</div>
+			<div class="col-sm-6 col-lg-4">
+				<ul class="list-unstyled">
+					<li><strong class="font-weight-700">Creato:</strong> 7 gennaio 2025</li>
+					<li><strong>Ultima modifica:</strong> 7 gennaio 2025</li>
+				</ul>
+			</div>
+		</div>
+        </section>
+        
+		<hr class="divider">
+
+        <section id="architettura_informazione">
+          <h2>Architettura informazione</h2>
+          <p class="lead">
+            <b>Struttura dell’applicazione</b>
+            L’applicazione mostrerà un sito web che conterrà una pagina “home” che mostra i punti di interesse del tema selezionato sia in "vista mappa" sia in "vista elenco", oltre ad una descrizione introduttiva dei contenuti rispetto al tema scelto. Al click sul punto di interesse (sia sulla mappa che sull’elenco) si apre la pagina di dettaglio, che contiene le informazioni in maniera completa.
+            
+            Sarà infine prevista una pagina di amministrazione che mostrerà l’elenco dei punti di interesse e sarà possibile aggiungerne di nuovi o modificare/cancellare gli esistenti, che sarà accessibile solo tramite login.
+            <br>
+            <b>Contenuti</b>
+            I contenuti saranno predisposti e realizzati in accordo e con la supervisione del docente di materia, in ogni caso sono previsti almeno 10 punti di interesse. Compito di ciascun gruppo è definire gli attributi specifici dei punti di interesse del proprio argomento scelto, oltre ovviamente a titolo, descrizione e foto. Ad esempio per un luogo di storia potrebbero essere la data, le conseguenze, per una battaglia le forze in campo, i morti e feriti, per un luogo di letteratura l’opera in cui compare, ecc.  
+            
+            <br>
+            <b>Requisiti tecnici</b>
+            L’applicazione sarà erogata in modalità SPA (Single Page Application) quindi con una sola pagina HTML ma URL dinamica definita da un suffisso di pagina che definisce univocamente pagina e contenuto nel seguente modo:.
+            <table class="table">
+              <tbody>
+                <tr>
+                  <td colspan="2" class="table-active">#home
+                  </td>
+                  <td>indica la pagina principale della SPA</td>
+                </tr>
+                <tr>
+                  <td colspan="2" class="table-active">#detail_{id}</td>
+                  <td>indica l'id del punto di interesse</td>
+                </tr>
+                <tr>
+                  <td colspan="2" class="table-active">#admin</td>
+                  <td>pagina di amministrazione</td>
+                </tr>
+              </tbody>
+            </table>
+          </p>
+          
+        </section>
+        
+		<hr class="divider">
+
+
+        <section id="UML">
+              <h2>UML</h2>
+              <p class="lead">Qui vanno inseriti i vari diagrammi UML</p>
+
+            </section>
+
+        <section id="umlcasiduso">
+          <h2>Diagramma di Casi d'uso</h2>
+          <p class="lead">Diagramma di casi d'uso non previsto.</p>
+          
+          
+        </section>
+
+        <section id="umloggetti">
+          <h2>Diagrammi di oggetti</h2>
+
+          <img src="/assets/images/Diagramma_POI_Componenti.drawio.png" alt="DIagramma ad oggetti">
+        </section>
+
+        <section id="umlstato">
+          <h2>Diagrammi di Stato</h2>
+          <img src="/assets/images/Diagramma_POI_Stato.drawio.png" alt="DIagramma di Stato">       
+
+        </section>
+
+        <section id="umlsequenza">
+          <h2>Diagrammi di Sequenza</h2>
+          <img src="/assets/images/Diagramma_POI_Sequenza.drawio.png" alt="DIagramma di Sequenza">              
+
+        </section>
+
+        <hr class="divider">
+
+        <section id="contenuti">
+          <h2>Contenuti del progetto</h2>
+          <table>
+            
+          </table>
+          <p class="lead">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Nome dell'Luogo</th>
+                  <th scope="col">Descrizione </th>
+                  <th scope="col">Foto</th>
+                  <th scope="col">Coordinate</th>
+                  <th scope="col">Data</th>
+                  <th scope="col">Contendenti</th>
+                  <th scope="col">Morti</th>
+                  <th scope="col">Vincitori</th>
+                </tr>
+              </thead>
+              <tbody class="table-group-divider">
+                <tr>
+                  <th scope="row">1</th>
+                  <td>Bombardamento di Guernica</td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <th scope="row">2</th>
+                  <td>Battaglia di malaga</td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <th scope="row">3</th>
+                  <td colspan="2">Conquista di Barcellona</td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+            
+            In questa sezione vanno inseriti i contenuti, organizzati in tabella e con un numero di immagini significative</p>
+
+        </section>
+
+         <hr class="divider">
+
+        <section id="wireframes">
+          <h2>Wireframes</h2>
+          <p class="lead">
+            <img src="assets/images/WireFrame_StoryBoard_POI-1.png" alt="home">
+            <img src="assets/images/WireFrame_StoryBoard_POI-2.png" alt="login page">
+            <img src="assets/images/WireFrame_StoryBoard_POI-3.png" alt="add POI page">
+            <img src="assets/images/WireFrame_StoryBoard_POI-4.png" alt="POI page">
+            <img src="assets/images/WireFrame_StoryBoard_POI-5.png" alt="Storyboard">
+            </p>
+
+           <hr class="divider">
+
+          <section id="progetto">
+          <h2>Il progetto</h2>
+          <p class="lead">
+            <b>Credenziali da inserirei per l'utente Amministratore</b>:
+            Username: utenteAmministratore
+            password: !amministratore!
+           </p>
+
+            <section id="link">
+            <h2>Link al progetto</h2>
+            <a href="">Link al progetto</a>
+
+        </section>
+        
+      </div>
+    </div>
+	
+  </div>
+  <!-- Content end --> 
+  
+  <!-- Footer
+  ============================ -->
+  <footer id="footer" class="section bg-dark footer-text-light">
+    <div class="container">
+      
+      <p class="text-center">ITT e LSSA "Molinari" - Milano <a href="progettimolinari.it">Progetti Molinari</a>. Tutti i diritti riservati</p>
+	  
+    </div>
+  </footer>
+  <!-- Footer end -->
+  
+</div>
+<!-- Document Wrapper end --> 
+
+<!-- Back To Top --> 
+<a id="back-to-top" data-toggle="tooltip" title="Back to Top" href="javascript:void(0)"><i class="fa fa-chevron-up"></i></a> 
+
+<!-- JavaScript
+============================ -->
+<script src="assets/vendor/jquery/jquery.min.js"></script> 
+<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script> 
+<!-- Highlight JS -->
+<script src="assets/vendor/highlight.js/highlight.min.js"></script> 
+<!-- Easing --> 
+<script src="assets/vendor/jquery.easing/jquery.easing.min.js"></script> 
+<!-- Magnific Popup --> 
+<script src="assets/vendor/magnific-popup/jquery.magnific-popup.min.js"></script> 
+<!-- Custom Script -->
+<script src="assets/js/theme.js"></script>
+</body>
+</html>
