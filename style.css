@@ -1,0 +1,9 @@
+.row{
+    padding-top: 25px !important;
+}
+input[type="text"], input[type="password"]{
+    background-color: beige !important; 
+}
+#dimension{
+    width: 50rem !important;
+}
