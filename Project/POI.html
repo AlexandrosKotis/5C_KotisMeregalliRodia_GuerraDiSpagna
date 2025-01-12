@@ -12,57 +12,63 @@
 </head>
 </head>
 
-<body>
+<body style="background-color:#fffdd0;">
 
   <div class="container text-center">
     <div class="row">
       <div class="col-1">
         <button class="btn btn-outline-secondary"><a class="text-dark" href="home.html">HOME</a></button>
       </div>
-      <h1 class="text-center">TITOLO</h1>
+      <h1 class="text-center">~TITOLO~</h1>
     </div>
+    
     <div class="row">
-      <div id="carouselExampleIndicators" class="carousel slide">
-        <div class="carousel-indicators">
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
-            aria-current="true" aria-label="Slide 1"></button>
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
-            aria-label="Slide 2"></button>
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
-            aria-label="Slide 3"></button>
+      <div class="rettangolo-evento">
+        <div id="carouselExampleIndicators" class="carousel slide">
+          <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+              aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+              aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+              aria-label="Slide 3"></button>
+          </div>
+          
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src="/assets/images/bilbao.jpg" class="d-block w-100" alt="bilbao" width="200" height="400">
+            </div>
+            <div class="carousel-item">
+              <img src="/assets/images/brunete.jpg" class="d-block w-100" alt="brunete" width="200" height="400">
+            </div>
+            <div class="carousel-item">
+              <img src="/assets/images/ebro.jpg" class="d-block w-100" alt="ebro" width="200" height="400">
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+            data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+            data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
         </div>
+      </div>
+    </div>
+
+    <div class="row">
+
+      <div class="col">
         
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <img src="/assets/images/bilbao.jpg" class="d-block w-100" alt="bilbao" width="200" height="400">
-          </div>
-          <div class="carousel-item">
-            <img src="/assets/images/brunete.jpg" class="d-block w-100" alt="brunete" width="200" height="400">
-          </div>
-          <div class="carousel-item">
-            <img src="/assets/images/ebro.jpg" class="d-block w-100" alt="ebro" width="200" height="400">
-          </div>
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
-          data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
-          data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
-      </div>
-    </div>
-    <div class="row">
-
-      <div class="col">
-        <h5 class="text-center">Qui verrà inserita la descrizione del evento (1000-1500 caratteri) </h5>
+        <h5 class="text-center"><span class="border border-black">~Qui verrà inserita la descrizione del evento (1000-1500 caratteri)~ </span></h5>
+      
       </div>
 
       <div class="col">
-        <table class="table text-center">
+        <table class="table table-bordered">
           <tr>
             <td>DATA</td>
             <td>2006</td>
@@ -90,7 +96,7 @@
 
     </div>
   </div>
-
+  <rect width="1920" height="400" x="0" y="0" />
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 
