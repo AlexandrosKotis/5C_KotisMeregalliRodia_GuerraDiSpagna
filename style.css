@@ -7,3 +7,11 @@ input[type="text"], input[type="password"]{
 #dimension{
     width: 50rem !important;
 }
+
+.rettangolo-evento{
+    background-color: #E4BB19; /* Colore del rettangolo */
+    padding: 20px;              /* Spazio interno */
+    width: 1920px;               /* Larghezza */
+    height: 440px;              /* Altezza */
+    text-align: center;  
+}
