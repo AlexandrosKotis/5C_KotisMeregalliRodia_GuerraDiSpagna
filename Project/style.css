@@ -4,7 +4,7 @@
 input[type="text"], input[type="password"]{
     background-color: beige !important; 
 }
-#dimension{
+.dimension{
     width: 50rem !important;
 }
 
