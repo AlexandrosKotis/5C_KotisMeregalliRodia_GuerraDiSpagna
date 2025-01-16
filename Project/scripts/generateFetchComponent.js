@@ -1,60 +1,107 @@
-import { generateFetchComponent } from "./fetchCache.js";
+import {
+    parseConfiguration
+} from "./jsonParser.js"
 
-export function createMap(parentElement) {
-    const zoom = 12;
-    const maxZoom = 19;
-    const places = new Array();
-    let map;
 
+export function generateFetchComponent() {
+    let config;
+    let configKey;
     return {
-        build: () => {
-            return new Promise((resolve, reject) => {
-                const fetchCache = generateFetchComponent();
-                fetchCache.build("../../config.json","cache").then(()=>{
-                    fetchCache.getPostData().then((d)=>{
-                        let data = JSON.parse(d);
-                        if(map) map.remove();
-                        map = L.map(parentElement).setView([45.4639102, 9.1906426], zoom);
-                        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                            maxZoom: maxZoom,
-                            attribution: '© <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-                        }).addTo(map);
-                        for(const key in data){
-                            places.push({name: ("Morti: " + data[key].morti + ", Feriti: "+data[key].feriti+", Data e Ora: "+new Date(data[key].dataora).toUTCString()), coords: [data[key].address.lat, data[key].address.lon]});
-                            const marker = L.marker([data[key].address.lat, data[key].address.lon]).addTo(map);
-                            marker.bindPopup("<b>" + ("Morti: " + data[key].morti + ", Feriti: "+data[key].feriti+", Data e Ora: "+new Date(data[key].dataora).toUTCString()) + "</b>");
-                        }
-                        resolve("build map done");
-                    }).catch(reject);
+        build: (pathConfig, keyConfig) => {
+            return new Promise(function (resolve, reject) {
+                parseConfiguration("/config.json").then((c) => {
+                    config = c;
+                    configKey = keyConfig;
+                    resolve("ok");
                 }).catch(reject);
             })
         },
-        render: (index) => {
-            if(!index) index = 0;
-            if(map) map.remove();
-            map = L.map(parentElement).setView([45.4639102, 9.1906426], zoom);
-            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                maxZoom: maxZoom,
-                attribution: '© <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-            }).addTo(map);
-            places.forEach((place) => {
-                const marker = L.marker(place.coords).addTo(map);
-                marker.bindPopup("<b>" + place.name + "</b>");
+
+        setData: (data) => {
+            return new Promise((resolve, reject) => {
+                if(config[configKey].set == undefined || config[configKey].token == undefined || config[configKey].key== undefined){
+                    return reject("config errato") ;
+                }
+                fetch(config[configKey].set, {
+                        method: "POST",
+                        headers: {
+                            "content-type": "application/json",
+                            "key": config[configKey].token
+                        },
+                        body: JSON.stringify({
+                            key: config[configKey].key,
+                            value: JSON.stringify(data)
+                        })
+                    })
+                    .then(r => r.json())
+                    .then(data => resolve(data.result))
+                    .catch(err => reject(err.result));
             });
         },
-        addPlace: (name, coords) => {
-            console.log(places);
-            return new Promise((resolve, reject) => {
-                if (places.some(place => place.name === name)) {
-                    return reject(places.length - 1);
-                }
-                places.push({
-                    name: name,
-                    coords: coords
-                });
-                resolve(places.length - 1);
-            })
 
+        /*Metodo da utilizzare per la Cache remota, prendere le cose salvate i cache*/ 
+        getPostData: () => {
+            return new Promise((resolve, reject) => {
+                if(config[configKey].get == undefined || config[configKey].token == undefined || config[configKey].key == undefined){
+                    return reject("config errato") ;
+                }
+                fetch(config[configKey].get, {
+                        method: "POST",
+                        headers: {
+                            "content-type": "application/json",
+                            "key": config[configKey].token
+                        },
+                        body: JSON.stringify({
+                            key: config[configKey].key
+                        })
+                    })
+                    .then(r => r.json())
+                    .then(data => resolve(data.result))
+                    .catch(err => reject(err.result));
+            })
+        },
+
+        /*Serve per prendere le location dei POP-UP*/
+        getData: (value) => {
+            return new Promise((resolve, reject) => {
+                if(config[configKey].get == undefined || config[configKey].token == undefined || !(config[configKey].get).includes("$TOKEN") || !(config[configKey].get).includes("$VALUE")){
+                    return reject("config errato") ;
+                }
+                let url = (config[configKey].get).replace("$TOKEN", config[configKey].token).replace("$VALUE", value);
+                fetch(url)
+                    .then(r => r.json())
+                    .then(data => resolve(data))
+                    .catch(err => reject(err));
+            })
+        },
+
+        login: (username, password) => {
+            return new Promise((resolve, reject) => {
+                if(config[configKey].login == undefined || config[configKey].token == undefined){
+                    return reject("config errato") ;
+                }
+                fetch(config[configKey].login, { 
+                  method: "POST",
+                  headers: {
+                     "content-type": "application/json",
+                     "key": config[configKey].token
+                  },
+                  body: JSON.stringify({
+                     username: username,
+                     password: password
+                  })
+                })
+                .then(r => r.json())
+                .then(data => {
+                    if(data.result === true) {
+                        Cookies.set('isLogged', 'true', { expires: 365 })
+                        resolve(data.result)
+                    }
+                    else reject(data.result);
+                })
+                .catch(reject);
+              })
+            
         }
-    }
+    };
 }
