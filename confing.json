@@ -6,12 +6,14 @@
         "key": "POI"
     },
     "location": {
-        "token": "pk.267ee93114c6169239bee91fb8eef55d",
+        "token": "pk.9e18a5922b2d766c8728c94c6011a1d9",
         "get":"https://us1.locationiq.com/v1/search?key=$TOKEN&q=$VALUE&format=json" 
     },
     "credential": {
         "token": "c34f0c0d-aa6a-405a-9f06-8aad8e527116",
         "register": "https://ws.cipiaceinfo.it/credential/register",
-        "login": "https://ws.cipiaceinfo.it/credential/login"
+        "login": "https://ws.cipiaceinfo.it/credential/login",
+        "username": "utenteAmministratore",
+        "password": "!amministratore!"
     }
 }
