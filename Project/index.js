@@ -28,3 +28,30 @@ fetchComp.build("../../config.json").then(()=>{
     ;
     map.build();
 }).catch(console.error);
+
+map = L.map('map').setView(placess[0].coords, zoom);
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+   maxZoom: maxZoom,
+   attribution: '© <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+}).addTo(map);
+
+
+function render(){
+   prendiDatiCache().then((places)=>{
+      // console.log("risultato" );
+       console.log(placess );
+     placess.forEach((placess) => {
+   const marker = L.marker(placess.coords).addTo(map);
+   marker.bindPopup(`<b>${placess.name}</b>`);
+});
+});
+
+
+
+
+}
+
+function renderAll(){
+// inseriamo tutte le render per ogni mappa 
+
+}
