@@ -28,28 +28,37 @@
     };
   };
   */
-  const createForm = (parentElement) => {
-    let data;
-    let callback = null;
-  
-    return {  
-      setLabels: (labels) => { data = labels; },  
-      onsubmit: (callbackInput) => { callback = callbackInput},
-      render: () => { 
-        parentElement.innerHTML = 
-          data.map((name, index) => {
-              return <div>${name}\n<input id="${name}" type="text" /></div>;
-            }).join('\n')
-            + "<button type='button' id='submit'>Submit</button>";  
-        document.querySelector("#submit").onclick = () => {
-          const result = {};
-          data.forEach((name) => {
-            result[name] = document.querySelector("#" + name).value;
-          });
-          callback(result);
-        }          
-      },
-    };
-  };
+const createForm = (parentElement) => {
+  let data;
+  let callback = null;
 
-  
+  return {
+    setLabels: (labels) => { data = labels; },
+    onsubmit: (callbackInput) => { callback = callbackInput },
+    render: () => {
+      parentElement.innerHTML =
+        data.map((name, index) => {
+          return <div>${name}\n<input id="${name}" type="text" /></div>;
+        }).join('\n')
+        + "<button type='button' id='submit'>Submit</button>";
+      document.querySelector("#submit").onclick = () => {
+        const result = {};
+        data.forEach((name) => {
+          result[name] = document.querySelector("#" + name).value;
+        });
+        callback(result);
+      }
+    },
+  };
+};
+
+/*<div class="mb-3">
+                        <label for="User" class="form-label">User</label>
+                        <input type="text" class="form-control" id="User">
+                    </div>
+                    <div class="mb-3">
+                        <label for="Password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="Password">
+                    </div>
+                    <button class="btn btn-outline-secondary"><a class="text-dark" href="#pagina0">Annulla</a></button>
+                    <button type="submit" class="btn btn-outline-info"><a href="#pagina2">Invia</a></button> */
