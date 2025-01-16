@@ -1,39 +1,126 @@
-import { parseConfiguration } from "./jsonParser.js";
+import {
+    parseConfiguration
+} from "./jsonParser.js"
+//import Cookies from "../../node_modules/js-cookie/dist/js.cookie.min.js";
 
 export function generateFetchComponent() {
     let config;
-
+    let configKey;
     return {
-        build: (pathConfig) => {
+        build: (pathConfig, keyConfig) => {
+            return new Promise(function (resolve, reject) {
+                parseConfiguration(pathConfig).then((c) => {
+                    config = c;
+                    configKey = keyConfig;
+                    resolve("ok");
+                }).catch(reject);
+            })
+        },
+
+        setData: (data) => {
             return new Promise((resolve, reject) => {
-                parseConfiguration(pathConfig).parse()
-                    .then((c) => {
-                        config = c;
-                        resolve("ok");
+                if(config[configKey].set == undefined || config[configKey].token == undefined || config[configKey].key== undefined){
+                    return reject("config errato") ;
+                }
+                fetch(config[configKey].set, {
+                        method: "POST",
+                        headers: {
+                            "content-type": "application/json",
+                            "key": config[configKey].token
+                        },
+                        body: JSON.stringify({
+                            key: config[configKey].key,
+                            value: JSON.stringify(data)
+                        })
                     })
-                    .catch(reject);
+                    .then(r => r.json())
+                    .then(data => resolve(data.result))
+                    .catch(err => reject(err.result));
             });
         },
+
+        getPostData: () => {
+            return new Promise((resolve, reject) => {
+                if(config[configKey].get == undefined || config[configKey].token == undefined || config[configKey].key == undefined){
+                    return reject("config errato") ;
+                }
+                fetch(config[configKey].get, {
+                        method: "POST",
+                        headers: {
+                            "content-type": "application/json",
+                            "key": config[configKey].token
+                        },
+                        body: JSON.stringify({
+                            key: config[configKey].key
+                        })
+                    })
+                    .then(r => r.json())
+                    .then(data => resolve(data.result))
+                    .catch(err => reject(err.result));
+            })
+        },
+
         getData: (value) => {
             return new Promise((resolve, reject) => {
-                let urlTemplate = "https://us1.locationiq.com/v1/search?key=$TOKEN&q=$VALUE&format=json";
+                if(config[configKey].get == undefined || config[configKey].token == undefined || !(config[configKey].get).includes("$TOKEN") || !(config[configKey].get).includes("$VALUE")){
+                    return reject("config errato") ;
+                }
+                let url = (config[configKey].get).replace("$TOKEN", config[configKey].token).replace("$VALUE", value);
+                fetch(url)
+                    .then(r => r.json())
+                    .then(data => resolve(data))
+                    .catch(err => reject(err));
+            })
+        },
 
-                urlTemplate = urlTemplate.replace("$TOKEN", config.tokenLocationIq);
-                urlTemplate = urlTemplate.replace("$VALUE", value);
-
-                fetch(urlTemplate)
-                    .then(response => response.json())
-                    .then((r) => {
-                        const lat = r[0].lat;
-                        const lon = r[0].lon;
-                        console.log(lat, lon);  
-                        resolve([lat, lon]); 
-                    })
-                    .catch((error) => {
-                        console.error(error);
-                        reject(error);  
-                    });
-            });
+        login: (username, password) => {
+            return new Promise((resolve, reject) => {
+                if(config[configKey].login == undefined || config[configKey].token == undefined){
+                    return reject("config errato") ;
+                }
+                fetch(config[configKey].login, { 
+                  method: "POST",
+                  headers: {
+                     "content-type": "application/json",
+                     "key": config[configKey].token
+                  },
+                  body: JSON.stringify({
+                     username: username,
+                     password: password
+                  })
+                })
+                .then(r => r.json())
+                .then(data => {
+                    if(data.result === true) {
+                        Cookies.set('isLogged', 'true', { expires: 365 })
+                        resolve(data.result)
+                    }
+                    else reject(data.result);
+                })
+                .catch(reject);
+              })
+            
+        },
+        register: (username, password) => {
+            return new Promise((resolve, reject) => {
+                if(config[configKey].register == undefined || config[configKey].token == undefined){
+                    return reject("config errato") ;
+                }
+                fetch(config[configKey].register, { 
+                  method: "POST",
+                  headers: {
+                     "content-type": "application/json",
+                     "key": config[configKey].token
+                  },
+                  body: JSON.stringify({
+                     username: username,
+                     password: password
+                  })
+                })
+                .then(r => r.json())
+                .then(data => resolve(data))
+                .catch(reject);
+              })
         }
     };
 }
