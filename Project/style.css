@@ -27,3 +27,8 @@ input[type="text"], input[type="password"]{
  #colorHome{
     background-color:#fffdd0;
  }
+
+ 
+#map { 
+    width: 600px; height: 600px; 
+}
