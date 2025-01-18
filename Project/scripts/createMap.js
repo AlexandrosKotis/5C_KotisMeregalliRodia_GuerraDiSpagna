@@ -10,19 +10,19 @@ export function createMap(parentElement) {
         build: () => {
             return new Promise((resolve, reject) => {
                 const fetchCache = generateFetchComponent();
-                fetchCache.build("../../config.json","cache").then(()=>{
-                    fetchCache.getPostData().then((d)=>{
+                fetchCache.build("../../config.json", "cache").then(() => {
+                    fetchCache.getPostData().then((d) => {
                         let data = JSON.parse(d);
-                        if(map) map.remove();
+                        if (map) map.remove();
                         map = L.map(parentElement).setView([40.416775, -3.703790], zoom);
                         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                             maxZoom: maxZoom,
                             attribution: '© <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
                         }).addTo(map);
-                        for(const key in data){
-                            places.push({name: ("Morti: " + data[key].morti + ", Feriti: "+data[key].feriti+", Data e Ora: "+new Date(data[key].dataora).toUTCString()), coords: [data[key].address.lat, data[key].address.lon]});
-                            const marker = L.marker([data[key].address.lat, data[key].address.lon]).addTo(map);
-                            marker.bindPopup("<b>" + ("Morti: " + data[key].morti + ", Feriti: "+data[key].feriti+", Data e Ora: "+new Date(data[key].dataora).toUTCString()) + "</b>");
+                        for (const key in data) {
+                            places.push({ name: ("Nome Evento: " + data[key].titolo + ", Data: " + data[key].anni), coords: [data[key].latitudine, data[key].longitudine] });
+                            const marker = L.marker({ lat: data[key].latitudine, lon: data[key].longitudine }).addTo(map);
+                            marker.bindPopup("<b>" + ("Nome Evento: " + data[key].titolo + ", Data: " + data[key].anni) + "</b>");
                         }
                         resolve("build map done");
                     }).catch(reject);
@@ -30,17 +30,29 @@ export function createMap(parentElement) {
             })
         },
         render: (index) => {
-            if(!index) index = 0;
-            if(map) map.remove();
-            map = L.map(parentElement).setView([45.4639102, 9.1906426], zoom);
-            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                maxZoom: maxZoom,
-                attribution: '© <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-            }).addTo(map);
-            places.forEach((place) => {
-                const marker = L.marker(place.coords).addTo(map);
-                marker.bindPopup("<b>" + place.name + "</b>");
-            });
+            const fetchCache = generateFetchComponent();
+
+            return new Promise((resolve, reject) => {
+
+                return fetchCache.build("../../config.json", "cache").then(() => {
+                    return fetchCache.getPostData().then((data) => {
+                        data = JSON.parse(data);
+                        if (!index) index = 0;
+                        if (map) map.remove();
+                        map = L.map(parentElement).setView([40.416775, -3.703790], zoom);
+                        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                            maxZoom: maxZoom,
+                            attribution: '© <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                        }).addTo(map);
+                        for (const key in data) {
+                            places.push({ name: ("Nome Evento: " + data[key].titolo + ", Data: " + data[key].anni), coords: [data[key].latitudine, data[key].longitudine] });
+                            const marker = L.marker({ lat: data[key].latitudine, lon: data[key].longitudine }).addTo(map);
+                            marker.bindPopup("<b>" + ("Nome Evento: " + data[key].titolo + ", Data: " + data[key].anni) + "</b>");
+                        }
+                        resolve();
+                    }).catch(reject);
+                }).catch(reject);
+            })
         },
         addPlace: (name, coords) => {
             console.log(places);
