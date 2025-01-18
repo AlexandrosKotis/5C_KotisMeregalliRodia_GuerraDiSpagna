@@ -51,14 +51,3 @@ const createForm = (parentElement) => {
     },
   };
 };
-
-/*<div class="mb-3">
-                        <label for="User" class="form-label">User</label>
-                        <input type="text" class="form-control" id="User">
-                    </div>
-                    <div class="mb-3">
-                        <label for="Password" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="Password">
-                    </div>
-                    <button class="btn btn-outline-secondary"><a class="text-dark" href="#pagina0">Annulla</a></button>
-                    <button type="submit" class="btn btn-outline-info"><a href="#pagina2">Invia</a></button> */

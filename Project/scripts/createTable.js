@@ -156,7 +156,7 @@ export const createTable = (parentElement) => {
         },
         build: () => {
             return new Promise((resolve, reject) => {
-                fetchComp = generateFetchComponent();
+                feetchComp = gnerateFetchComponent();
                 fetchComp.build("../../config.json", "cache").then(resolve).catch(reject);
             });
         },

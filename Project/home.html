@@ -10,10 +10,13 @@
     <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
         integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon">
     <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
 </head>
 
-<body id="colorHome" class="font">
+<body id="colorHome">
 
     <div id="pages">
         <div class="container page" id="pagina0">
@@ -28,17 +31,16 @@
                     <button class="btn btn-outline-info"><a href="#pagina1">Accedi</a></button>
                 </div>
             </div>
-            <!-- Bottone Cerca
-              <div class="row">
+            <div class="row">
                 <div class="col"></div>
                 <div class="col"> <input class="form-control" type="text" placeholder="cerca">
                 </div>
             </div>
-             -->
             <div class="row">
                 <div id="map" class="col"></div>
-                <div id="table" class="col">
-                    <!--<table class="table table-striped">
+                <div id="table" class="col"></div>
+                <!---<div id="table" class="col">
+                    <table class="table table-striped">
                         <tr>
                             <td>Nome evento 1</td>
                             <td>
@@ -75,18 +77,26 @@
                                 </div>
                             </td>
                         </tr>
-                    </table>--->
-                </div>
+                    </table>
+                </div>--->
             </div>
         </div>
 
 
         <div id="pagina1" class="hidden page container text-center position-absolute top-50 start-50 translate-middle">
-            <div>
-                <form>
-                    <div id="form"></div>
-                </form>
-            </div>
+            <form>
+                <div id="form"></div>
+                <!--<div class="mb-3">
+                        <label for="User" class="form-label">User</label>
+                        <input type="text" class="form-control" id="User">
+                    </div>
+                    <div class="mb-3">
+                        <label for="Password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="Password">
+                    </div>
+                    <button class="btn btn-outline-secondary"><a class="text-dark" href="#pagina0">Annulla</a></button>
+                    <button type="submit" class="btn btn-outline-info"><a href="#pagina2">Invia</a></button>-->
+            </form>
         </div>
 
 
@@ -177,10 +187,10 @@
                 <div class="col-1">
                     <button class="btn btn-outline-secondary"><a class="text-dark" href="#pagina0">HOME</a></button>
                 </div>
-                <h1 class="text-center">~TITOLO~</h1>
             </div>
 
             <div class="row">
+                <h1 class="text-center">~TITOLO~</h1>
                 <div class="rettangolo-evento">
                     <div id="carouselExampleIndicators" class="carousel slide">
                         <div class="carousel-indicators">

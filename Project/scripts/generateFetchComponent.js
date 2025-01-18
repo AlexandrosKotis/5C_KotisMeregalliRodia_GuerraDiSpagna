@@ -1,6 +1,4 @@
-import {
-    parseConfiguration
-} from "./jsonParser.js"
+import {parseConfiguration} from "./jsonParser.js"
 
 
 export function generateFetchComponent() {
@@ -9,7 +7,7 @@ export function generateFetchComponent() {
     return {
         build: (pathConfig, keyConfig) => {
             return new Promise(function (resolve, reject) {
-                parseConfiguration("/config.json").then((c) => {
+                parseConfiguration(pathConfig).then((c) => {
                     config = c;
                     configKey = keyConfig;
                     resolve("ok");
