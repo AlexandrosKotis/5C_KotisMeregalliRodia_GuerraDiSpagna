@@ -22,7 +22,8 @@ export const createForm = (parentElement) =>{
       document.querySelector("#submit").onclick = () => {
         const result = data.map((name) => {
           if(document.querySelector("#" + name).value===""||document.querySelector("#" + name).value===null||document.querySelector("#" + name).value===undefined){
-              //da aggiungere errore mancata compilazione
+              console.log("MANCANO DATI")//da aggiungere errore mancata compilazione
+              return;
           }
           return document.querySelector("#" + name).value;
         });
