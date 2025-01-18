@@ -26,8 +26,8 @@ const formElement = document.querySelector("#form"); // prendi il div form
 const form = createForm(formElement); // crea l'elemento form
 let dati=["titolo","descrizione","anni","longitudine","latitudine","contendenti","morti","vincitore","foto"];//dati da inserire nella form x kotis se riesci a prenderli dal config sarebbe meglio
 form.setLabels(dati);// inseriscili nella form
-fin={};//dizionario dove troveremo i valori della form dopo aver premuto submit ATTENZIONE! Ricordarsi di pulirlo dopo aver caricato i valori nella cache 
-finlogin={}//dizionario dove troveremo i valori della login dopo aver premuto submit ATTENZIONE! Ricordarsi di pulirlo dopo cpntrollato l'accesso 
+let fin={};//dizionario dove troveremo i valori della form dopo aver premuto submit ATTENZIONE! Ricordarsi di pulirlo dopo aver caricato i valori nella cache 
+let finlogin={};//dizionario dove troveremo i valori della login dopo aver premuto submit ATTENZIONE! Ricordarsi di pulirlo dopo cpntrollato l'accesso 
 function dizzForm(res){// funzione che popolerà il dizionario finale 
    
     for(let i=0;i<dati.length;i++){
@@ -36,7 +36,7 @@ function dizzForm(res){// funzione che popolerà il dizionario finale
     fin["anni"]=fin["anni"].split("-");
     fin["coordinate"]=[fin["longitudine"],fin["latitudine"]];
     fin["contendenti"]=fin["contendenti"].split("-");
-    fin["foto"]=fin["foto"].split("-");
+    fin["foto"]=fin["foto"].split(";");
 
 
 }
