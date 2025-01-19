@@ -32,6 +32,7 @@ export const createForm = (parentElement) =>{
         data.forEach((element) => {
           document.querySelector("#" + element).value = "";
         });
+        
         callback(result);
       }  
                
