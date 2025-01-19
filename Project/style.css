@@ -37,4 +37,12 @@ input[type="text"], input[type="password"]{
     width: 25rem;
 
 }
-#search-table{}
+
+#tab {
+    width: 100% !important;
+    max-height: 70vh !important;
+    overflow-y: scroll !important;
+    overflow-x: auto !important;
+    margin-left: 2% !important;
+    table-layout: fixed I !important;
+}
