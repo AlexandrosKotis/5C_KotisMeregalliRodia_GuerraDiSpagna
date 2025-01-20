@@ -1,6 +1,6 @@
 import { generateFetchComponent } from "./generateFetchComponent.js";
 
-export function createMap(parentElement) {
+export function createMap(parentElement, pubSub) {
     const zoom = 12;
     const maxZoom = 19;
     const places = new Array();
@@ -24,16 +24,16 @@ export function createMap(parentElement) {
                             const marker = L.marker({ lat: data[key].latitudine, lon: data[key].longitudine }).addTo(map);
                             marker.bindPopup("<b>" + ("Nome Evento: " + data[key].titolo + ", Data: " + data[key].anni) + "</b>");
                         }
-                        resolve("build map done");
+                        resolve();
+                        
+                        pubSub.publish("mapBuilt");
                     }).catch(reject);
                 }).catch(reject);
             })
         },
         render: (index) => {
             const fetchCache = generateFetchComponent();
-
             return new Promise((resolve, reject) => {
-
                 return fetchCache.build("../../config.json", "cache").then(() => {
                     return fetchCache.getPostData().then((data) => {
                         data = JSON.parse(data);
@@ -50,6 +50,7 @@ export function createMap(parentElement) {
                             marker.bindPopup("<b>" + ("Nome Evento: " + data[key].titolo + ", Data: " + data[key].anni) + "</b>");
                         }
                         resolve();
+                        pubSub.publish("mapRendered");
                     }).catch(reject);
                 }).catch(reject);
             })
@@ -65,8 +66,7 @@ export function createMap(parentElement) {
                     coords: coords
                 });
                 resolve(places.length - 1);
-            })
-
+            });
         }
     }
 }

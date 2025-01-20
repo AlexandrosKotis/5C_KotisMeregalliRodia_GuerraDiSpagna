@@ -1,8 +1,7 @@
 import { generateFetchComponent } from "./generateFetchComponent.js";
 
-export const createTable = (parentElement) => {
-  let fetchComp;
-  let searchCallback = null;
+export const createTable = (parentElement, pubSub) => {
+  const fetchComp = generateFetchComponent();
   let callback = null;
   return {
     onsubmit: (callbackinput) => {
@@ -11,15 +10,14 @@ export const createTable = (parentElement) => {
     render: (newList) => {
       if (newList === null || newList === undefined || newList === "") {
         return new Promise((resolve, reject) => {
-          return fetchComp
-            .getPostData()
-            .then((data) => {
+          fetchComp.getPostData()
+          .then((data) => {
               const listToShow = JSON.parse(data);
 
               let html = `
                         <div class="container">
     <div class="row">
-        <label for="table-search" class="sr-only">Search</label>
+        <b><label for="table-search" class="sr-only">Search</label></b>
         <div class="col d-flex align-items-center">
             <input type="text" id="table-search" class="form-control me-2">
             <button id="search-table" type="button" class="btn btn-light">Search</button>
@@ -72,6 +70,8 @@ export const createTable = (parentElement) => {
                 searchInput.value = "";
               };
 
+              pubSub.publish("tableRendered");
+
               resolve();
             })
             .catch(reject);
@@ -82,7 +82,7 @@ export const createTable = (parentElement) => {
         let html = `
                         <div class="container">
     <div class="row">
-        <label for="table-search" class="sr-only">Search</label>
+        <b><label for="table-search" class="sr-only">Search</label></b>
         <div class="col d-flex align-items-center">
             <input type="text" id="table-search" class="form-control me-2">
             <button id="search-table" type="button" class="btn btn-light">Search</button>
@@ -90,7 +90,7 @@ export const createTable = (parentElement) => {
     </div>
 
     
-    <div class="mt-4" id="tab">
+    <div class="mt-4">
         <table class="table table-striped">
             <thead class="">
                 <tr>
@@ -105,8 +105,7 @@ export const createTable = (parentElement) => {
             <tbody>`;
 
               for (const element in listToShow) {
-                html +=
-                  `
+                html += `
                                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">` +
                   listToShow[element].titolo +
@@ -124,31 +123,24 @@ export const createTable = (parentElement) => {
                     </div>
                         `;
 
+              parentElement.innerHTML = html;
 
-        parentElement.innerHTML = html;
+              const searchInput = document.getElementById("table-search");
+              const searchButton = document.getElementById("search-table");
 
-        const searchInput = document.getElementById("table-search");
-        const searchButton = document.getElementById("search-table");
+              searchButton.onclick = () => {
+                const result = searchInput.value;
+                callback(result);
+                searchInput.value = "";
+              };
 
-        searchButton.onclick = () => {
-          //  console.info(this.searchCallback);
-          // if (searchCallback) {
-          const result = searchInput.value;
-          callback(result);
-          searchInput.value = "";
-          // }
-        };
+              pubSub.publish("tableRendered");
+
+              return new Promise((resolve) => resolve());
       }
     },
-
-    build: () => {
-      return new Promise((resolve, reject) => {
-        fetchComp = generateFetchComponent();
-        fetchComp
-          .build("../../config.json", "cache")
-          .then(resolve)
-          .catch(reject);
-      });
+    build: (fetchComponent) => {
+      fetchComp = fetchComponent;
     },
   };
 };
